@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rohit Rawat | Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(to bottom right, #00c6ff, #203a43, #d1d1d1);
+            background-size: 300% 300%;
+            animation: gradientAnimation 10s ease infinite;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            text-align: center;
+            flex-direction: column;
+        }
+
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .container {
+            max-width: 480px;
+            width: 100%;
+        }
+
+        .profile-pic {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid white;
+            animation: pulse-glow 2.5s infinite ease-in-out;
+            margin-bottom: 20px;
+        }
+
+        @keyframes pulse-glow {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+            }
+
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 0 25px rgba(0, 198, 255, 0.6);
+            }
+
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+            }
+        }
+
+        h1 {
+            font-size: 26px;
+        }
+
+        p {
+            font-size: 14px;
+            color: #d1d1d1;
+            margin-bottom: 20px;
+        }
+
+        .buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .buttons button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            background-color: white;
+            color: #2c5364;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .buttons button:hover {
+            background-color: #00c6ff;
+            color: white;
+        }
+
+        .section {
+            display: none;
+            margin-top: 10px;
+            animation: fade 0.5s ease, 3dAnimation 1s ease;
+        }
+
+        @keyframes fade {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+
+
+        .section.active {
+            display: block;
+        }
+
+        .section-header {
+            font-size: 20px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-weight: 600;
+        }
+
+        .section-header i {
+            color: #00c6ff;
+        }
+
+        .links a {
+            display: block;
+            background-color: white;
+            color: #2c5364;
+            text-decoration: none;
+            margin: 10px 0;
+            padding: 14px 20px;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .links a:hover {
+            background-color: #00c6ff;
+            color: white;
+            transform: scale(1.03);
+        }
+
+        .social-icons a {
+            display: block;
+            margin: 10px 0;
+            color: white;
+            font-size: 18px;
+            text-decoration: none;
+            transition: 0.3s ease;
+        }
+
+        .social-icons a i {
+            margin-right: 10px;
+            color: #00c6ff;
+        }
+
+        .social-icons a:hover {
+            transform: scale(1.05);
+            color: #00c6ff;
+        }
+
+        footer {
+            margin-top: 30px;
+            font-size: 12px;
+            color: #aaa;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            width: 90%;
+            height: 90%;
+            background: white;
+            position: relative;
+            padding: 10px;
+        }
+
+        .modal-content iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #333;
+        }
+
+        .coding-buttons {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .coding-buttons a {
+            text-decoration: none;
+            width: 100%;
+        }
+
+        .coding-buttons button {
+            width: 100%;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 30px;
+            background-color: white;
+            color: #2c5364;
+            font-size: 16px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: 0.3s ease;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+        .coding-buttons button i {
+            color: #00c6ff;
+        }
+
+        .coding-buttons button:hover {
+            background-color: #00c6ff;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .coding-buttons button:hover i {
+            color: white;
+        }
+
+        .skill-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            background-color: white;
+            color: #2c5364;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease-in-out;
+            animation: blue-blink 1s infinite alternate;
+        }
+
+        .skill-btn:hover {
+            background-color: #00c6ff;
+            color: white;
+        }
+
+        @keyframes blue-blink {
+            0% {
+                box-shadow: 0 0 5px #00c6ff;
+            }
+
+            100% {
+                box-shadow: 0 0 20px #00c6ff, 0 0 40px #00c6ff;
+            }
+        }
+
+        .education-section {
+            display: none;
+            margin-top: 20px;
+            animation: fade 0.5s ease;
+        }
+
+        .education-header {
+            font-size: 20px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-weight: 600;
+        }
+
+        .education-header i {
+            color: #00c6ff;
+        }
+
+        .education-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .education-list li {
+            background: #ffffff;
+            color: #2c5364;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+
+        .education-list h3 {
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        .education-list p {
+            font-size: 14px;
+            color: #777;
+        }
+
+        #education {
+            border: 2px solid #00c6ff;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 4px 6px rgba(0, 198, 255, 0.6), 0 -4px 6px rgba(0, 198, 255, 0.6);
+            transition: box-shadow 0.3s ease-in-out;
+        }
+
+        #education:hover {
+            box-shadow: 0 8px 12px rgba(0, 198, 255, 0.8), 0 -8px 12px rgba(0, 198, 255, 0.8);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <img src="./rohit_PHoto.jpg" alt="Rohit Rawat" class="profile-pic" />
+        <h1>Rohit Rawat</h1>
+        <p>Java Developer | Spring Boot | MERN | Full Stack Enthusiast</p>
+
+        <div class="buttons">
+            <button onclick="showSection('about')"><i class="fas fa-user"></i> About Me</button>
+            <button onclick="showSection('projects')"><i class="fas fa-briefcase"></i> Projects</button>
+            <button onclick="showSection('coding')"><i class="fas fa-code"></i> Coding Profiles</button>
+            <button onclick="showSection('skills')"><i class="fas fa-tools"></i> Skills</button>
+            <button onclick="showSection('education')"><i class="fas fa-graduation-cap"></i> Education</button>
+            <button onclick="openResume()"><i class="fas fa-file-alt"></i> Resume</button>
+            <button onclick="downloadResume()"><i class="fas fa-download"></i> Download Resume</button>
+        </div>
+
+        &nabla;
+
+        <!-- About -->
+        <div id="about" class="section">
+            <div class="section-header">
+                <i class="fas fa-user"></i>
+                <h2>About Me</h2>
+            </div>
+            <p>I am a backend Java Developer with experience in building Spring Boot applications, APIs, and working
+                with MongoDB, MySQL, and PostgreSQL. I’m also familiar with frontend and MERN stack development.</p>
+        </div>
+
+        &nabla;
+
+        <!-- Skills -->
+        <div id="skills" class="section">
+            <div class="section-header">
+                <i class="fas fa-tools"></i>
+                <h2>Technical Skills</h2>
+            </div>
+            <div class="skills-container" style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
+                <button class="skill-btn"><i class="fas fa-code"></i> Java</button>
+                <button class="skill-btn"><i class="fas fa-code"></i> C++</button>
+                <button class="skill-btn"><i class="fas fa-code"></i> Python (Basic)</button>
+                <button class="skill-btn"><i class="fas fa-laptop-code"></i> Spring Boot</button>
+                <button class="skill-btn"><i class="fas fa-network-wired"></i> Microservices</button>
+                <button class="skill-btn"><i class="fas fa-terminal"></i> Node.js</button>
+                <button class="skill-btn"><i class="fas fa-terminal"></i> Express.js</button>
+                <button class="skill-btn"><i class="fas fa-key"></i> JWT Auth</button>
+                <button class="skill-btn"><i class="fas fa-unlock"></i> OAuth2</button>
+                <button class="skill-btn"><i class="fab fa-html5"></i> HTML</button>
+                <button class="skill-btn"><i class="fab fa-css3-alt"></i> CSS</button>
+                <button class="skill-btn"><i class="fab fa-js"></i> JavaScript</button>
+                <button class="skill-btn"><i class="fab fa-react"></i> React.js</button>
+                <button class="skill-btn"><i class="fas fa-paint-brush"></i> Tailwind CSS</button>
+                <button class="skill-btn"><i class="fas fa-palette"></i> Material-UI</button>
+                <button class="skill-btn"><i class="fas fa-database"></i> MySQL</button>
+                <button class="skill-btn"><i class="fas fa-database"></i> MongoDB</button>
+                <button class="skill-btn"><i class="fas fa-database"></i> PostgreSQL</button>
+                <button class="skill-btn"><i class="fas fa-database"></i> MongoDB Atlas</button>
+                <button class="skill-btn"><i class="fab fa-git-alt"></i> Git</button>
+                <button class="skill-btn"><i class="fab fa-github"></i> GitHub</button>
+                <button class="skill-btn"><i class="fas fa-vial"></i> Postman</button>
+                <button class="skill-btn"><i class="fas fa-book"></i> Swagger</button>
+                <button class="skill-btn"><i class="fas fa-chart-pie"></i> JasperReports</button>
+                <button class="skill-btn"><i class="fas fa-chart-bar"></i> Apache Superset</button>
+                <button class="skill-btn"><i class="fas fa-database"></i> PostgreSQL</button>
+                <button class="skill-btn"><i class="fas fa-memory"></i> Redis</button>
+                <!-- <button class="skill-btn"><i class="fas fa-tasks"></i> JIRA</button> -->
+                <button class="skill-btn"><i class="fas fa-cloud"></i> AWS (Basic)</button>
+                <button class="skill-btn"><i class="fab fa-docker"></i> Docker (Basic)</button>
+                <button class="skill-btn"><i class="fas fa-network-wired"></i> Kubernetes (Basic)</button>
+            </div>
+        </div>
+
+        &nabla;
+        <!-- Projects -->
+        <div id="projects" class="section links">
+            <div class="section-header">
+                <i class="fas fa-briefcase"></i>
+                <h2>Projects</h2>
+            </div>
+            <a href="https://github.com/RohitRawat2001/GoShoppingFinal" target="_blank">GoShopping Project</a>
+            <a href="https://github.com/RohitRawat2001/Cloud_Contact" target="_blank">Cloud Contact Manager</a>
+            <a href="https://github.com/RohitRawat2001/Shooting_Game" target="_blank">2D Shooting Game</a>
+            <a href="https://github.com/RohitRawat2001" target="_blank"
+                style="margin-top: 10px; font-weight: 600; color: black; text-decoration: underline;">
+                See more projects on GitHub →
+            </a>
+        </div>
+        &nabla;
+
+        <div id="education" class="section education-section">
+            <div class="education-header">
+                <i class="fas fa-graduation-cap"></i>
+                <h2>Education</h2>
+            </div>
+            <ul class="education-list">
+                <li>
+                    <h3>B.Tech in Computer Science</h3>
+                    <p>MVN University, Completed in 2024, CGPA: 8.08</p>
+                </li>
+                <li>
+                    <h3>Class 12th - CBSE</h3>
+                    <p>Dharam Public School, Completed in 2020</p>
+                </li>
+            </ul>
+        </div>
+        &nabla;
+        <!-- Coding Profiles -->
+        <div id="coding" class="section coding-buttons">
+            <div class="section-header">
+                <i class="fas fa-code"></i>
+                <h2>Coding Profiles</h2>
+            </div>
+            <a href="https://github.com/RohitRawat2001" target="_blank">
+                <button><i class="fab fa-github"></i> GitHub</button>
+            </a>
+            <a href="https://www.linkedin.com/in/rohit-rawat-9a70b1230/" target="_blank">
+                <button><i class="fab fa-linkedin"></i> LinkedIn</button>
+            </a>
+            <a href="https://leetcode.com/u/rohitrawat5172/" target="_blank">
+                <button><i class="fas fa-code"></i> LeetCode</button>
+            </a>
+            <a href="https://www.geeksforgeeks.org/user/rohitrawat5172/" target="_blank">
+                <button><i class="fas fa-code"></i> GeeksforGeeks</button>
+            </a>
+            <a href="https://www.naukri.com/code360/profile/Rohit2001" target="_blank">
+                <button><i class="fas fa-laptop-code"></i> Coding Ninjas</button>
+            </a>
+        </div>
+
+
+
+
+        <footer>
+            <p>Made with ❤️ by Rohit Rawat</p>
+        </footer>
+    </div>
+
+    <!-- Resume Modal -->
+    <div class="modal" id="resumeModal">
+        <div class="modal-content">
+            <span class="close" onclick="closeResume()">&times;</span>
+            <iframe src="./rohitResume .pdf"></iframe>
+        </div>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach((section) => {
+                section.classList.remove('active');
+            });
+
+            const selectedSection = document.getElementById(sectionId);
+            selectedSection.classList.add('active');
+        }
+
+        function openResume() {
+            document.getElementById('resumeModal').style.display = 'flex';
+        }
+
+        function closeResume() {
+            document.getElementById('resumeModal').style.display = 'none';
+        }
+
+        function downloadResume() {
+            const link = document.createElement('a');
+            link.href = 'rohitResume .pdf';
+            link.download = 'Rohit_Rawat_Resume.pdf';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        window.onclick = function (event) {
+            const modal = document.getElementById('resumeModal');
+            if (event.target === modal) modal.style.display = 'none';
+        };
+
+        window.onload = function () {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach((section) => {
+                section.classList.add('active');
+            });
+        };
+    </script>
+
+
+</body>
+
+</html>
