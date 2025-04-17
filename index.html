@@ -360,30 +360,93 @@
             box-shadow: 0 8px 12px rgba(0, 198, 255, 0.8), 0 -8px 12px rgba(0, 198, 255, 0.8);
         }
 
-        @media (max-width: 500px) {
-            .buttons button {
-                flex: 1 1 100%;
-            }
-
-            .coding-buttons button {
-                font-size: 14px;
-                padding: 10px;
-            }
-        }
-
 
         html {
             scroll-behavior: smooth;
+        }
+
+        body.light-mode {
+            background: linear-gradient(to bottom right, #000000, #233435, #000000);
+            background-size: 300% 300%;
+            animation: gradientAnimation 10s ease infinite;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            text-align: center;
+            flex-direction: column;
+        }
+
+        body.dark-mode {
+
+            background: linear-gradient(to bottom right, #00c6ff, #2d3b3f, #d1d1d1);
+            background-size: 300% 300%;
+            animation: gradientAnimation 10s ease infinite;
+            color: rgb(255, 255, 255);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            text-align: center;
+            flex-direction: column;
+        }
+
+
+        .mode-toggle {
+            margin: 20px auto;
+            padding: 10px 25px;
+            border: none;
+            border-radius: 25px;
+            font-weight: bold;
+            background-color: #ffffff;
+            color: #2c5364;
+            cursor: pointer;
+            display: block;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Hover effect */
+        .mode-toggle:hover {
+            background-color: #e6e6e6;
+        }
+
+        /* Dark Mode styles (optional improvement) */
+        body.dark-mode .mode-toggle {
+            background-color: #2c5364;
+            color: #ffffff;
+        }
+
+        body.dark-mode .mode-toggle:hover {
+            background-color: #3a5a74;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 600px) {
+            .mode-toggle {
+                width: 80%;
+                padding: 12px;
+                font-size: 16px;
+            }
         }
     </style>
 </head>
 
 <body>
+
     <div class="container">
+
         <img src="./rohit_PHoto.jpg" alt="Rohit Rawat" class="profile-pic" />
         <h1>Rohit Rawat</h1>
         <p>Java Developer | Spring Boot | MERN | Full Stack Enthusiast</p>
 
+        <button id="mode-toggle"
+            style="margin-top: 10px; margin-bottom:10px; padding: 10px 20px; border-radius: 20px; font-weight: bold; background-color: #ffffff; color: #2c5364; cursor: pointer;">
+            🌙 Dark Theme
+        </button>
         <div class="buttons">
             <button onclick="showSection('about')"><i class="fas fa-user"></i> About Me</button>
             <button onclick="showSection('projects')"><i class="fas fa-briefcase"></i> Projects</button>
@@ -395,7 +458,7 @@
         </div>
 
         &nabla;
-        
+
 
         <!-- About -->
         <div id="about" class="section">
@@ -562,6 +625,28 @@
                 section.classList.add('active');
             });
         };
+
+        const toggleBtn = document.getElementById("mode-toggle");
+        const body = document.body;
+
+        // Default mode
+        let darkMode = true;
+        body.classList.add("dark-mode");
+        toggleBtn.textContent = "🚥 Choose Theme";
+
+        toggleBtn.addEventListener("click", () => {
+            darkMode = !darkMode;
+
+            if (darkMode) {
+                body.classList.remove("light-mode");
+                body.classList.add("dark-mode");
+                toggleBtn.textContent = "🚥 Choose Theme";
+            } else {
+                body.classList.remove("dark-mode");
+                body.classList.add("light-mode");
+                toggleBtn.textContent = "🚥 Choose Theme";
+            }
+        });
     </script>
 
 
