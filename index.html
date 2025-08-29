@@ -600,6 +600,18 @@
                 font-size: 14px;
             }
         }
+
+        /* Scroll Animation */
+        .section {
+            opacity: 0;
+            transform: translateX(-100px);
+            transition: all 0.8s ease-out;
+        }
+
+        .section.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
     </style>
 </head>
 
@@ -859,6 +871,23 @@
                 alert("❌ Oops! Something went wrong, please try again.");
             }
         });
+
+        // Scroll animation using Intersection Observer
+        const sections = document.querySelectorAll('.section');
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                    observer.unobserve(entry.target); // animate once
+                }
+            });
+        }, { threshold: 0.2 });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
     </script>
 
 
