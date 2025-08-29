@@ -432,6 +432,174 @@
                 font-size: 16px;
             }
         }
+
+        /* Contact Section */
+        #contact {
+            margin-top: 20px;
+            animation: fadeIn 1s ease-in-out;
+            padding: 40px;
+            background: linear-gradient(135deg, #4e5d6d, #1d2a33);
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        #contact .section-header h2 {
+            font-size: 32px;
+            color: #fff;
+            text-align: center;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        #contact .section-header i {
+            font-size: 48px;
+            color: #fff;
+            display: block;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        /* Contact Form */
+        .contact-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        #contact form {
+            width: 100%;
+            max-width: 500px;
+            padding: 30px;
+            background-color: #1e3a5f;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            animation: formSlide 1s ease-out forwards;
+        }
+
+        /* Input Fields */
+        #contact input,
+        #contact textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 2px solid #2c5364;
+            border-radius: 8px;
+            background-color: #2d3a4d;
+            color: white;
+            font-size: 16px;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        #contact input:focus,
+        #contact textarea:focus {
+            outline: none;
+            border-color: #00c6ff;
+            transform: scale(1.05);
+        }
+
+        #contact input::placeholder,
+        #contact textarea::placeholder {
+            color: #777;
+        }
+
+        /* Button */
+        .submit-btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 30px;
+            background-color: #00c6ff;
+            color: white;
+            font-size: 18px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: #007b9f;
+            transform: translateY(-5px);
+        }
+
+        /* 3D Hover Effect */
+        #contact input:hover,
+        #contact textarea:hover,
+        .submit-btn:hover {
+            transform: translateY(-2px) rotateX(5deg);
+        }
+
+        #contact input:focus,
+        #contact textarea:focus,
+        .submit-btn:focus {
+            outline: none;
+            transform: translateY(0) scale(1.05);
+        }
+
+        /* Keyframe Animations */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes formSlide {
+            0% {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Media Queries for Responsiveness */
+        @media screen and (max-width: 768px) {
+            #contact .section-header h2 {
+                font-size: 26px;
+            }
+
+            #contact form {
+                padding: 20px;
+            }
+
+            #contact input,
+            #contact textarea {
+                font-size: 14px;
+                padding: 10px;
+            }
+
+            .submit-btn {
+                font-size: 16px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            #contact .section-header h2 {
+                font-size: 22px;
+            }
+
+            #contact input,
+            #contact textarea {
+                font-size: 13px;
+                padding: 8px;
+            }
+
+            .submit-btn {
+                font-size: 14px;
+            }
+        }
     </style>
 </head>
 
@@ -571,6 +739,32 @@
         </div>
 
 
+        <div id="contact" class="section">
+            <div class="section-header">
+                <i class="fas fa-envelope"></i>
+                <h2>Contact Me</h2>
+            </div>
+            <div class="contact-container">
+
+                <form id="contact-form" action="https://formspree.io/f/xrbaeryz" method="POST">
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" placeholder="Your Name" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="_replyto" placeholder="Your Email" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message:</label>
+                        <textarea id="message" name="message" rows="5" placeholder="Your Message" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+
+
 
 
         <footer>
@@ -645,6 +839,24 @@
                 body.classList.remove("dark-mode");
                 body.classList.add("light-mode");
                 toggleBtn.textContent = "🚥 Choose Theme";
+            }
+        });
+
+
+        const form = document.getElementById("contact-form");
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const formData = new FormData(form);
+            const response = await fetch(form.action, {
+                method: form.method,
+                body: formData,
+                headers: { 'Accept': 'application/json' }
+            });
+            if (response.ok) {
+                alert("✅ Thanks! Your message has been sent.");
+                form.reset();
+            } else {
+                alert("❌ Oops! Something went wrong, please try again.");
             }
         });
     </script>
